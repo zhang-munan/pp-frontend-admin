@@ -70,13 +70,21 @@ export default defineComponent({
 						return arr;
 					};
 
+					// 二期预留菜单（路由以 /phase2/ 开头）置灰展示
+					const reserved = (m: Menu.Item): boolean =>
+						m.type == 0
+							? !!m.children?.length && m.children.every(reserved)
+							: !!m.path?.startsWith('/phase2/');
+					const style = reserved(e) ? { opacity: 0.45 } : undefined;
+
 					if (e.type == 0) {
 						return h(
 							<el-sub-menu />,
 							{
 								index: String(e.id),
 								key: e.id,
-								popperClass: 'app-slider__menu'
+								popperClass: 'app-slider__menu',
+								style
 							},
 							{
 								title() {
@@ -92,7 +100,8 @@ export default defineComponent({
 							<el-menu-item />,
 							{
 								index: e.meta?.isHome ? '/' : e.path,
-								key: e.id
+								key: e.id,
+								style
 							},
 							{
 								default() {

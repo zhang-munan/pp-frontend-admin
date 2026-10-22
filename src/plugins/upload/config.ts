@@ -14,7 +14,7 @@ export default (): ModuleConfig => {
 				size: 100
 			},
 			// 云端上传路径前缀
-			prefixPath: 'send/app/base',
+			prefixPath: 'maoyu/admin',
 			// 规则
 			rules: [
 				{

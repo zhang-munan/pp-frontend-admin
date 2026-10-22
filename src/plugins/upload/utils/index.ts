@@ -73,7 +73,7 @@ export function pathJoin(...parts: string[]): string {
 	}
 }
 
-const CLOUD_FILE_ROOT = 'send';
+const CLOUD_FILE_ROOT = 'maoyu';
 
 /** 所有云端对象路径统一收口到 send 目录，避免重复添加前缀。 */
 export function withCloudFileRoot(path: string): string {

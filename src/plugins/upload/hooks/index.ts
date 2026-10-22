@@ -94,7 +94,7 @@ export function useUpload() {
 								if (isLocal) {
 									url = res;
 								} else {
-									// 只编码每个路径段，保留目录分隔符，确保展示地址仍为 /send/...。
+									// 只编码每个路径段，保留目录分隔符，确保展示地址仍为 /maoyu/...。
 									const previewKey = key
 										.split('/')
 										.map(encodeURIComponent)
