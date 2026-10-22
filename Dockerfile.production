@@ -1,0 +1,19 @@
+# syntax=docker/dockerfile:1
+FROM node:22-alpine AS build
+
+WORKDIR /app
+RUN corepack enable
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
+COPY packages/crud/package.json packages/crud/
+COPY packages/vite-plugin/package.json packages/vite-plugin/
+RUN pnpm install --no-frozen-lockfile
+COPY . .
+RUN test -s build/cool/eps.json
+RUN pnpm run build
+
+FROM nginx:1.27-alpine
+
+COPY nginx.conf /etc/nginx/nginx.conf
+COPY --from=build /app/dist /app
+
+EXPOSE 80
